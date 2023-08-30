@@ -14,25 +14,31 @@
           <div class="row">
             <div class="col-12">
               <div class="card">
-              <form>
-                <div class="form-group">
-                  <label for="name">Nom :</label>
-                  <input type="text" id="name" name="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label for="description">Description :</label>
-                  <textarea id="description" name="description" class="form-control" required></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="sector">Secteur :</label>
-                  <input type="text" id="sector" name="sector" class="form-control" required>
-                </div>
-                <div class="form-group">
-                  <label for="website">Site web :</label>
-                  <input type="text" id="website" name="website" class="form-control" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Créer</button>
-              </form>
+                <div class="card-body">
+                  <form *ngIf="!submitted">
+                    <div class="form-group mb-3">
+                      <label for="name">Nom :</label>
+                      <input type="text" [(ngModel)]="profile.name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="description">Description :</label>
+                      <textarea  class="form-control" [(ngModel)]="profile.description" name="description"></textarea>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="sector">Secteur :</label>
+                      <input type="text"  [(ngModel)]="profile.sector" name="sector" class="form-control" required />
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="website">Site web :</label>
+                      <input type="text" [(ngModel)]="profile.website" name="website" class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" (click)="newProfile()" class="btn btn-primary" style="margin-right: 10px;">Sauvegarder</button>
+                      <a routerLink="/profiles" class="btn btn-secondary">Annuler</a>
+                    </div>
+                  </form>
+                  
+            </div>
             </div>
            </div>
           </div>

@@ -1,25 +1,66 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileCreateService } from '../profile-create.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Profile } from '../models/profile.model';
 
 @Component({
   selector: 'app-profile-form',
   templateUrl: './profile-form.component.html',
   styleUrls: ['./profile-form.component.scss']
 })
-export class ProfileFormComponent {
+export class ProfileFormComponent implements OnInit{
 
-  constructor(private profileCreateService: ProfileCreateService) {}
+  profile: Profile = {
+    name: '',
+    description: '',
+    sector: '',
+    website:''
+  };
+  submitted = false;
 
-  onSubmit(profileData: any): void {
-    this.profileCreateService.createProfile(profileData).subscribe(
-      (response) => {
-        console.log('Profil créé avec succès', response);
-        // Réinitialiser les champs du formulaire si nécessaire
-      },
-      (error) => {
-        console.error('Erreur lors de la création du profil', error);
-      }
-    );
+
+  profileForm: FormGroup;
+
+  constructor(private profileCreateService: ProfileCreateService) {
+
+    this.profileForm = new FormGroup({
+      name: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required),
+      sector: new FormControl('', Validators.required),
+      website: new FormControl('', Validators.required)
+    });
   }
+
+  ngOnInit(): void {
+  }
+
+
+  saveTutorial(): void {
+    const data = {
+      name: this.profile.name,
+      description: this.profile.description
+    };
+
+    this.profileCreateService.createProfile(data)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.submitted = true;
+        },
+        error: (e) => console.error(e)
+      });
+  }
+
+  newProfile(): void {
+    this.submitted = false;
+    this.profile = {
+      name: '',
+      description: '',
+      sector: '',
+      website:''
+    };
+  }
+
+
 
 }

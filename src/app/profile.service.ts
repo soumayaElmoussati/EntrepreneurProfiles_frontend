@@ -7,11 +7,17 @@ import { Observable } from 'rxjs';
 })
 export class ProfileService {
 
-  private apiUrl = 'http://localhost:8000/api/profiles/';
+  private apiUrl = 'http://localhost:8000/api/';
   constructor(private http: HttpClient) {}
   
   getProfiles(): Observable<any> {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl+'profiles/');
   }
+
+  createProfile(profileData: any) {
+    return this.http.post(this.apiUrl+'create/', profileData);
+  }
+
+ 
 
 }
