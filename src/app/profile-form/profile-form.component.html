@@ -8,32 +8,35 @@
         <div class="wrapper" style="margin-top: 20px;">
           <div class="row">
             <div class="col-12">
-              <h3 style="color:#00008B;">Ajouter un nouveau profil</h3>
+              <h3 style="color:#008B8B;">Ajouter un nouveau profil</h3>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <form *ngIf="!submitted">
+                  <form [formGroup]="profileForm" (submit)="onSubmit()">
                     <div class="form-group mb-3">
                       <label for="name">Nom :</label>
-                      <input type="text" [(ngModel)]="profile.name" name="name" class="form-control" required>
+                      <input type="text" formControlName="name" class="form-control">
+                      <div *ngIf="profileForm?.get('name')?.hasError('required') && profileForm?.get('name')?.touched" class="text-danger">Le nom est requis.</div>
                     </div>
                     <div class="form-group mb-3">
                       <label for="description">Description :</label>
-                      <textarea  class="form-control" [(ngModel)]="profile.description" name="description"></textarea>
+                      <textarea  class="form-control" formControlName="description" name="description"></textarea>
                     </div>
                     <div class="form-group mb-3">
                       <label for="sector">Secteur :</label>
-                      <input type="text"  [(ngModel)]="profile.sector" name="sector" class="form-control" required />
+                      <input type="text" formControlName="sector" name="sector" class="form-control" required />
+                      <div *ngIf="profileForm?.get('sector')?.hasError('required') && profileForm?.get('sector')?.touched" class="text-danger">Le secteur est requis.</div>
                     </div>
                     <div class="form-group mb-3">
-                      <label for="website">Site web :</label>
-                      <input type="text" [(ngModel)]="profile.website" name="website" class="form-control" required />
+                      <label>Site web :</label>
+                      <input type="text" formControlName="site" name="site" class="form-control" required />
+                      <div *ngIf="profileForm?.get('site')?.hasError('required') && profileForm?.get('site')?.touched" class="text-danger">Le site est requis.</div>
                     </div>
                     <div class="form-group">
-                      <button type="submit" (click)="newProfile()" class="btn btn-primary" style="margin-right: 10px;">Sauvegarder</button>
+                      <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Sauvegarder</button>
                       <a routerLink="/profiles" class="btn btn-secondary">Annuler</a>
                     </div>
                   </form>

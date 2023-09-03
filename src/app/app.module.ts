@@ -9,6 +9,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +20,17 @@ import { FormsModule } from '@angular/forms';
     ProfileFormComponent,
     ProfileListComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    SubscriptionComponent,
+    InscriptionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    ReactiveFormsModule, 
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

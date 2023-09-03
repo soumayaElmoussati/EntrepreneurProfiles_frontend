@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileCreateService } from '../profile-create.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Profile } from '../models/profile.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile-form',
@@ -9,58 +10,43 @@ import { Profile } from '../models/profile.model';
   styleUrls: ['./profile-form.component.scss']
 })
 export class ProfileFormComponent implements OnInit{
-
-  profile: Profile = {
-    name: '',
-    description: '',
-    sector: '',
-    website:''
-  };
-  submitted = false;
-
-
   profileForm: FormGroup;
 
-  constructor(private profileCreateService: ProfileCreateService) {
+  constructor(private router: Router, private profileCreateService: ProfileCreateService,private fb: FormBuilder) {
 
-    this.profileForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      sector: new FormControl('', Validators.required),
-      website: new FormControl('', Validators.required)
+    this.profileForm = this.fb.group({
+      name: ['', Validators.required],
+      description: [''],
+      sector: ['', Validators.required],
+      site: ['', Validators.required]
     });
   }
 
   ngOnInit(): void {
   }
 
-
-  saveTutorial(): void {
-    const data = {
-      name: this.profile.name,
-      description: this.profile.description
-    };
-
-    this.profileCreateService.createProfile(data)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.submitted = true;
+  onSubmit() {
+    if (this.profileForm.valid) {
+      const formData = this.profileForm.value;
+      this.profileCreateService.createProfile(formData).subscribe(
+        (response) => {
+          // Gérer la réussite de la création du profil (par exemple, afficher un message de succès).
+          console.log('Profil créé avec succès :', response);
+          this.router.navigate(['/profiles']);
         },
-        error: (e) => console.error(e)
-      });
+        (error) => {
+          // Gérer les erreurs de création de profil (par exemple, afficher un message d'erreur).
+          console.error('Erreur lors de la création du profil :', error);
+        }
+      );
+    } else {
+      // Marquer les champs comme "touched" pour afficher les messages d'erreur.
+      this.profileForm.markAllAsTouched();
+    }
   }
+  
 
-  newProfile(): void {
-    this.submitted = false;
-    this.profile = {
-      name: '',
-      description: '',
-      sector: '',
-      website:''
-    };
-  }
-
+  
 
 
 }

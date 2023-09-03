@@ -1,15 +1,15 @@
-<div class="container">
+
   <div class="row">
-    <div class="col-3">
-      <app-sidebar></app-sidebar> <!-- Composant de la barre latérale -->
-    </div>
-    <div class="col-9">
+    <div class="col-12">
       <div class="main-content">
         <div class="wrapper" style="margin-top: 20px;">
           <div class="row">
             <div class="col-12">
-              <h3 style="color:#00008B;">Liste des profils</h3>
-              <a routerLink="/add-profile" class="btn btn-primary" style="margin-bottom: 10px;">Ajouter un nouvel profil</a>
+              <div class="d-flex justify-content-between align-items-center">
+                <h3 style="color:#008B8B;">Liste des profiles</h3>
+                <a routerLink="/add-profile" class="btn btn-primary">Ajouter un nouvel profile</a>
+              </div>
+              <hr>
             </div>
           </div>
           <div class="row">
@@ -19,7 +19,8 @@
                   <h5 class="card-title">{{ profile.name }}</h5>
                   <p class="card-text">{{ profile.description }}</p>
                   <p class="card-text">{{ profile.sector }}</p>
-                  <a class="btn btn-primary" [href]="profile.website">Visiter le Site Web</a>
+                  <a class="btn btn-primary" [href]="profile.website">Visiter le site web</a>
+                
                 </div>
               </div>
             </div>
@@ -28,4 +29,4 @@
       </div>
     </div>
   </div>
-</div>
+
