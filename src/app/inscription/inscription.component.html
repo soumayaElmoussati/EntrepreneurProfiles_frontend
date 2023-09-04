@@ -1,15 +1,101 @@
-<div class="row">
-    <div class="col-12">
-    <h2>Inscription</h2>
-    <!-- Affichez ici les détails de l'abonnement sélectionné -->
-    <p>Abonnement sélectionné : {{ selectedSubscription.name }}</p>
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2>Inscription</h2>
+        <form (ngSubmit)="onSubmit()" #registrationForm="ngForm">
+          <!-- Champ du nom d'utilisateur -->
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Nom</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              [(ngModel)]="profile.name"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              name="email"
+              [(ngModel)]="profile.email"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input
+              type="text"
+              class="form-control"
+              id="description"
+              name="description"
+              [(ngModel)]="profile.description"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="sector" class="form-label">Secteur</label>
+            <input
+              type="text"
+              class="form-control"
+              id="sector"
+              name="sector"
+              [(ngModel)]="profile.sector"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="site" class="form-label">Site</label>
+            <input
+              type="text"
+              class="form-control"
+              id="site"
+              name="site"
+              [(ngModel)]="profile.site"
+              required
+            />
+          </div>
   
-    <!-- Formulaire d'inscription -->
-    <form >
-      <!-- Champs du formulaire (nom d'utilisateur, mot de passe, e-mail, etc.) -->
-      <!-- Utilisez [(ngModel)] pour lier les valeurs à des propriétés du composant -->
+          <!-- Champ du mot de passe -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              [(ngModel)]="profile.password"
+              required
+            />
+          </div>
   
-      <button type="submit" class="btn btn-primary">S'inscrire</button>
-    </form>
+          <!-- Champ de l'e-mail -->
+          <div class="mb-3">
+            <label for="telephone" class="form-label">Téléphone</label>
+            <input
+              type="telephone"
+              class="form-control"
+              id="telephone"
+              name="telephone"
+              [(ngModel)]="profile.telephone"
+              required
+            />
+          </div>
+  
+          <!-- Autres champs d'inscription (ajoutez-les selon vos besoins) -->
+  
+          <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
+  

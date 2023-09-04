@@ -9,7 +9,7 @@
             <h5 class="card-title">{{ offer.name }}</h5>
             <p class="card-text">{{ offer.description }}</p>
             <p class="card-text">Prix : {{ offer.price | currency:'EUR' }}</p>
-            <button class="btn btn-primary">Souscrire</button>
+            <button class="btn btn-primary" [routerLink]="'/inscription'" [queryParams]="{ subscriptionId: offer.id }">Souscrire</button>
           </div>
         </div>
       </div>

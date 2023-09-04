@@ -8,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class SubscriptionComponent implements OnInit {
   offers = [
     {
+      id: 1,
       name: 'Offre Standard',
       description: 'Abonnement de base avec fonctionnalités limitées.',
       price: 19.99
     },
     {
+      id: 2,
       name: 'Offre Premium',
       description: 'Abonnement premium avec toutes les fonctionnalités.',
       price: 49.99
