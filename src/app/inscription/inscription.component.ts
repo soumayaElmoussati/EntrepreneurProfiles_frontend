@@ -9,13 +9,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./inscription.component.scss']
 })
 export class InscriptionComponent implements OnInit {
-  selectedSubscriptionId: number | undefined;
+  subscriptionId: number | null = null;
   profile: any = {};
 
   constructor(private route: ActivatedRoute ,private subscriptionDataService: SubscriptionDataService,
      private profileService: ProfileService     ) { 
-      this.route.queryParams.subscribe((params) => {
-        this.selectedSubscriptionId = params['subscriptionId'];
+      this.route.queryParams.subscribe((queryParams) => {
+        this.subscriptionId = queryParams['subscriptionId'];
       });
   }
 
@@ -23,8 +23,8 @@ export class InscriptionComponent implements OnInit {
   }
 
   onSubmit() {
-
-
+  
+    this.profile.subscription_id = this.subscriptionId;
     this.profileService.createProfile(this.profile).subscribe(
       (response) => {
         // Gestion de la réponse du backend en cas de succès

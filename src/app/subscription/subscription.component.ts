@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { SubscriptionDataService } from '../subscription-data.service';
 
 @Component({
   selector: 'app-subscription',
@@ -6,24 +8,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./subscription.component.scss']
 })
 export class SubscriptionComponent implements OnInit {
-  offers = [
-    {
-      id: 1,
-      name: 'Offre Standard',
-      description: 'Abonnement de base avec fonctionnalités limitées.',
-      price: 19.99
-    },
-    {
-      id: 2,
-      name: 'Offre Premium',
-      description: 'Abonnement premium avec toutes les fonctionnalités.',
-      price: 49.99
-    }
-  ];
+ 
+  subscriptions: any[] = [];
+  selectedSubscriptionId: number | null = null;
 
-  constructor() { }
+  constructor(private subscriptionService: SubscriptionDataService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.loadSubscriptions();
+  }
+
+
+  loadSubscriptions(): void {
+    this.subscriptionService.getSubscriptions().subscribe(
+      (subscriptions) => {
+        this.subscriptions = subscriptions;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  selectSubscription(subscriptionId: number): void {
+    this.selectedSubscriptionId = subscriptionId;
+  }
+
+  navigateToInscription(): void {
+    console.log('Méthode navigateToInscription() appelée.');
+    if (this.selectedSubscriptionId) {
+      this.router.navigate(['/inscription'], {
+        queryParams: { subscriptionId: this.selectedSubscriptionId }
+      });
+    } else {
+      console.log('Aucune souscription sélectionnée.');
+    }
   }
 
 }

@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileService {
 
-  private apiUrl = 'http://localhost:8000/api';
+  private apiUrl = 'http://localhost:8000/api/';
   constructor(private http: HttpClient) {}
   
   getProfiles(): Observable<any> {
@@ -26,7 +26,7 @@ export class ProfileService {
 
   createProfile(profileData: any): Observable<any> {
     // Effectuez une requête POST pour la création du profil
-    return this.http.post(`${this.apiUrl}/create-profile/`, profileData);
+    return this.http.post(`${this.apiUrl}create-profile/`, profileData);
   }
 
   
